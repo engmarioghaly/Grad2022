@@ -16,7 +16,7 @@ int distance ;
 int pro1read ;
 int pro2read ; 
 //rfid init
-MFRC522 rfid(SS_PIN, RST_PIN);
+MFRC522 rfid(ss, rst);
 MFRC522::MIFARE_Key key; 
 int cardnum[4];
 
@@ -37,7 +37,7 @@ void setup() {
   }
 }
 
-}
+
 
 void loop() {
 // ultrasonic 
@@ -57,7 +57,7 @@ void loop() {
 
   else
   {
-     Serial.println (distance)
+     Serial.println (distance);
   }
 
 
@@ -109,14 +109,8 @@ if ( ! rfid.PICC_ReadCardSerial())
    for (byte i = 0; i < 4; i++) {
       cardnum[i] = rfid.uid.uidByte[i];
     }
-   
-    Serial.println("The NUID tag is:");
-    Serial.print("In hex: ");
-    printHex(rfid.uid.uidByte, rfid.uid.size);
-    Serial.println();
-    Serial.print("In dec: ");
-    printDec(rfid.uid.uidByte, rfid.uid.size);
-    Serial.println();
+
+  
   }
   else Serial.println("Card read previously.");
 
